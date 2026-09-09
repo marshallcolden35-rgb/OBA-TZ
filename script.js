@@ -1,5 +1,6 @@
 const SUPABASE_URL = "https://ksqtedskvplgwexkuajz.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_LdD0uGB_tecjabBv9s2JAQ_II-EEsom";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById("mainNav");
   const menuToggle = document.querySelector(".menu-toggle");
