@@ -90,29 +90,51 @@ document.addEventListener("DOMContentLoaded", () => {
   if (modal) {
     modal.addEventListener("click", event => {
       if (event.target === modal) close();
-    });
-  }
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") close();
-  });
-
   if (form) {
-    form.addEventListener("submit", event => {
-      event.preventDefault();
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
 
-      const title = modalTitle ? modalTitle.textContent : "";
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const password = form.querySelector('input[type="password"]').value;
+    const name = form.querySelector('input[type="text"]').value.trim();
+    const isLogin = modalTitle && modalTitle.textContent.includes("Ingia");
 
-      if (formMessage) {
-        if (title.includes("Ingia")) {
-          formMessage.textContent =
-            "Hii ni demo kwa sasa. Mfumo kamili wa kuingia utaunganishwa kwenye student system.";
-        } else {
-          formMessage.textContent =
-            "Usajili wa demo umepokelewa. Mfumo kamili wa wanafunzi utaunganishwa hatua inayofuata.";
-        }
+    if (formMessage) formMessage.textContent = "Inasubiri...";
+
+    if (isLogin) {
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        formMessage.textContent = "Imeshindikana: " + error.message;
+        return;
       }
-    });
+
+      formMessage.textContent = "Umeingia kikamilifu! 🎉";
+    } else {
+      const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name
+          }
+        }
+      });
+
+      if (error) {
+        formMessage.textContent = "Imeshindikana: " + error.message;
+        return;
+      }
+
+      formMessage.textContent =
+        "Akaunti imetengenezwa! 🎉 Angalia email yako kuthibitisha akaunti.";
+    }
+  });
+}
+       
   }
 
   const sections = document.querySelectorAll(
