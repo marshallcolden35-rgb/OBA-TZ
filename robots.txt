@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marshallcolden35-rgb.github.io/OBA-TZ/sitemap.xml
