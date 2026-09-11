@@ -19,7 +19,11 @@ button{width:100%;padding:15px;background:#18a875;color:white;border:0;border-ra
 
 <label>Jina Kamili</label>
 <input type="text" placeholder="Andika jina lako">
+<label>Email</label>
+<input type="email" placeholder="Andika email yako">
 
+<label>Password</label>
+<input type="password" placeholder="Tengeneza password">
 <label>Namba ya Simu</label>
 <input type="tel" placeholder="Mfano: 07XXXXXXXX">
 
@@ -36,9 +40,43 @@ button{width:100%;padding:15px;background:#18a875;color:white;border:0;border-ra
 <button type="button" id="registerSubmit">Jisajili Sasa</button>
 </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
 <script>
-document.getElementById("registerSubmit").onclick = function() {
-  alert("Usajili umefanikiwa!");
+document.getElementById("registerSubmit").onclick = async function () {
+
+  const name = document.querySelector('input[type="text"]').value.trim();
+  const email = document.querySelector('input[type="email"]').value.trim();
+  const password = document.querySelector('input[type="password"]').value;
+
+  if (!name || !email || !password) {
+    alert("Tafadhali jaza taarifa zote.");
+    return;
+  }
+
+  if (password.length < 6) {
+    alert("Password iwe na angalau herufi 6.");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      data: {
+        full_name: name
+      }
+    }
+  });
+
+  if (error) {
+    alert("Usajili umeshindikana: " + error.message);
+    return;
+  }
+
+  alert("Akaunti imetengenezwa! 🎉 Angalia email yako kuthibitisha akaunti.");
 };
 </script>
+
 </html>
