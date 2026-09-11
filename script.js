@@ -87,13 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
     closeModal.addEventListener("click", close);
   }
 
-  if (modal) {
-    modal.addEventListener("click", event => {
-      if (event.target === modal) close();
-  if (form) {
+if (modal) {
+  modal.addEventListener("click", event => {
+    if (event.target === modal) close();
+  });
+}
+
+if (form) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
-
     const email = form.querySelector('input[type="email"]').value.trim();
     const password = form.querySelector('input[type="password"]').value;
     const name = form.querySelector('input[type="text"]').value.trim();
