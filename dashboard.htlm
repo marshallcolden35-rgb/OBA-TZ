@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Dashboard | OBA TZ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f8fc;
+  color:#222;
+}
+
+header{
+  background:#123b7a;
+  color:white;
+  padding:18px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:bold;
+}
+
+.logout{
+  background:#e74c3c;
+  color:white;
+  border:0;
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:25px;
+}
+
+.welcome{
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 5px 20px #0001;
+  margin-bottom:25px;
+}
+
+.welcome h1{
+  margin-top:0;
+  color:#123b7a;
+}
+
+.welcome p{
+  color:#666;
+}
+
+.section-title{
+  color:#123b7a;
+  margin-top:30px;
+}
+
+.courses{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+
+.course{
+  background:white;
+  padding:22px;
+  border-radius:15px;
+  box-shadow:0 5px 20px #0001;
+}
+
+.course h3{
+  margin-top:0;
+  color:#123b7a;
+}
+
+.course p{
+  color:#666;
+  line-height:1.5;
+}
+
+.course button{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:8px;
+  background:#18a875;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.status{
+  margin-top:15px;
+  padding:15px;
+  background:#eef6ff;
+  border-radius:10px;
+}
+
+footer{
+  text-align:center;
+  color:#777;
+  padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    OBA TZ 🎓
+  </div>
+
+  <button class="logout" id="logoutBtn">
+    Toka
+  </button>
+
+</header>
+
+
+<div class="container">
+
+  <div class="welcome">
+
+    <h1>
+      Karibu, <span id="studentName">Mwanafunzi</span> 👋
+    </h1>
+
+    <p>
+      Hii ni Student Dashboard yako ya Online Business Academy TZ.
+    </p>
+
+    <div class="status">
+      <strong>Status:</strong>
+      Akaunti yako iko tayari kujifunza 🎓
+    </div>
+
+  </div>
+
+
+  <h2 class="section-title">
+    📚 Kozi Zako
+  </h2>
+
+
+  <div class="courses">
+
+
+    <div class="course">
+
+      <h3>Digital Marketing</h3>
+
+      <p>
+        Jifunze jinsi ya kutangaza biashara yako mtandaoni
+        na kupata wateja kupitia digital marketing.
+      </p>
+
+      <button onclick="openCourse('Digital Marketing')">
+        Endelea na Kozi
+      </button>
+
+    </div>
+
+
+    <div class="course">
+
+      <h3>Online Business</h3>
+
+      <p>
+        Jifunze jinsi ya kuanzisha na kukuza biashara
+        kupitia mtandao.
+      </p>
+
+      <button onclick="openCourse('Online Business')">
+        Endelea na Kozi
+      </button>
+
+    </div>
+
+
+    <div class="course">
+
+      <h3>Social Media Marketing</h3>
+
+      <p>
+        Jifunze kutumia TikTok, Instagram, Facebook
+        na mitandao mingine kukuza biashara.
+      </p>
+
+      <button onclick="openCourse('Social Media Marketing')">
+        Endelea na Kozi
+      </button>
+
+    </div>
+
+
+    <div class="course">
+
+      <h3>Graphic Design</h3>
+
+      <p>
+        Jifunze misingi ya graphic design na kutengeneza
+        designs nzuri kwa biashara.
+      </p>
+
+      <button onclick="openCourse('Graphic Design')">
+        Endelea na Kozi
+      </button>
+
+    </div>
+
+
+    <div class="course">
+
+      <h3>Website Development</h3>
+
+      <p>
+        Jifunze kutengeneza websites kwa kutumia
+        HTML, CSS na JavaScript.
+      </p>
+
+      <button onclick="openCourse('Website Development')">
+        Endelea na Kozi
+      </button>
+
+    </div>
+
+
+    <div class="course">
+
+      <h3>AI & ChatGPT for Business</h3>
+
+      <p>
+        Jifunze kutumia AI na ChatGPT kusaidia
+        kukuza biashara yako.
+      </p>
+
+      <button onclick="openCourse('AI & ChatGPT for Business')">
+        Endelea na Kozi
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  © 2026 Online Business Academy TZ
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://ksqtedskvplgwexkuajz.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_LdD0uGB_tecjabBv9s2JAQ_II-EEsom";
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+// CHECK LOGIN
+
+async function checkUser(){
+
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if(!user){
+
+    window.location.href = "index.html";
+
+    return;
+  }
+
+
+  const name =
+    user.user_metadata?.full_name ||
+    user.email?.split("@")[0] ||
+    "Mwanafunzi";
+
+
+  document.getElementById("studentName").textContent =
+    name;
+
+}
+
+
+checkUser();
+
+
+// LOGOUT
+
+document.getElementById("logoutBtn").addEventListener(
+  "click",
+  async () => {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href = "index.html";
+
+  }
+);
+
+
+// COURSE
+
+function openCourse(course){
+
+  alert(
+    "Kozi ya " +
+    course +
+    " itaandaliwa hapa. 🎓"
+  );
+
+}
+
+</script>
+
+</body>
+</html>
