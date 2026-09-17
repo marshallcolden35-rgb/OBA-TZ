@@ -212,11 +212,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (formMessage) {
-          formMessage.textContent =
-            "Umeingia kikamilifu! 🎉";
-        }
+  formMessage.textContent =
+    "Umeingia kikamilifu! 🎉";
+}
 
-        return;
+setTimeout(() => {
+  window.location.href = "dashboard.html";
+}, 800);
+
+return;
       }
 
 
