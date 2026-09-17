@@ -43,40 +43,12 @@ button{width:100%;padding:15px;background:#18a875;color:white;border:0;border-ra
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 
-<script>
-document.getElementById("registerSubmit").onclick = async function () {
+</body>
 
-  const name = document.querySelector('input[type="text"]').value.trim();
-  const email = document.querySelector('input[type="email"]').value.trim();
-  const password = document.querySelector('input[type="password"]').value;
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
 
-  if (!name || !email || !password) {
-    alert("Tafadhali jaza taarifa zote.");
-    return;
-  }
-
-  if (password.length < 6) {
-    alert("Password iwe na angalau herufi 6.");
-    return;
-  }
-
-  const { error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password,
-    options: {
-      data: {
-        full_name: name
-      }
-    }
-  });
-
-  if (error) {
-    alert("Usajili umeshindikana: " + error.message);
-    return;
-  }
-
-  alert("Akaunti imetengenezwa! 🎉 Angalia email yako kuthibitisha akaunti.");
-};
+</html>
 </script>
 
 </html>
